@@ -40,6 +40,19 @@
   display: block;
 }
 
+.project-card__screenshot {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.project-card:hover .project-card__screenshot {
+  transform: scale(1.035);
+}
+
 .project-card__body {
   padding: 28px;
   display: flex;

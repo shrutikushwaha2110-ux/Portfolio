@@ -9,6 +9,9 @@ export interface Project {
   tech: string[];
   github: string;
   demo?: string;
+  /** Path under /public to a real screenshot of the running project (preferred
+   *  over the illustrative SVG fallback when present). */
+  image?: string;
   size: ProjectSize;
   accent: "lime" | "dark" | "cream";
   details: {
@@ -23,6 +26,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "battery-health",
+    image: "images/projects/battery-dashboard.webp",
     name: "Battery Health Monitoring Dashboard",
     category: "Full-Stack · IoT Data",
     oneLiner: "Real-time visibility into battery voltage, temperature and anomalies before they become failures.",
@@ -47,6 +51,7 @@ export const projects: Project[] = [
   },
   {
     id: "campusconnect",
+    image: "images/projects/campusconnect.webp",
     name: "CampusConnect",
     category: "Full-Stack · Campus Platform",
     oneLiner: "A role-based events & clubs platform for a university, with three separate dashboards and a tested SQLite backend.",
@@ -71,6 +76,7 @@ export const projects: Project[] = [
   },
   {
     id: "samagama-faq",
+    image: "images/projects/samagama-faq.webp",
     name: "Samagama FAQ Portal",
     category: "AI/ML · RAG",
     oneLiner: "An AI-powered FAQ portal that answers programme questions using Retrieval-Augmented Generation over real institutional content.",
@@ -95,6 +101,7 @@ export const projects: Project[] = [
   },
   {
     id: "expenseflow",
+    image: "images/projects/expenseflow.webp",
     name: "ExpenseFlow",
     category: "Backend · REST API",
     oneLiner: "A JWT-authenticated expense tracker API with categorised spending, monthly views and rate-limited endpoints.",
@@ -119,6 +126,7 @@ export const projects: Project[] = [
   },
   {
     id: "rogue-tower",
+    image: "images/projects/rogue-tower.webp",
     name: "Rogue Tower",
     category: "Frontend · Game Dev",
     oneLiner: "A dependency-free tower-defense game built on raw Canvas and vanilla JavaScript.",

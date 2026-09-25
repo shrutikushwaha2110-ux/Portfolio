@@ -12,7 +12,16 @@ export default function ProjectCard({ project, onOpen }: Props) {
   return (
     <article className={`project-card project-card--${project.size} project-card--${project.accent}`}>
       <div className="project-card__visual">
-        <ProjectGlyph project={project} />
+        {project.image ? (
+          <img
+            className="project-card__screenshot"
+            src={`${import.meta.env.BASE_URL}${project.image}`}
+            alt={`${project.name} interface screenshot`}
+            loading="lazy"
+          />
+        ) : (
+          <ProjectGlyph project={project} />
+        )}
       </div>
 
       <div className="project-card__body">
