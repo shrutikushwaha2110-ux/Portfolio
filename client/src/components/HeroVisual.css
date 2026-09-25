@@ -1,8 +1,9 @@
 .hero-visual {
   width: 100%;
-  max-width: 480px;
+  max-width: 440px;
   margin: 0 auto;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 520 / 600;
+  animation: hero-float 6s ease-in-out infinite;
 }
 
 .hero-visual__svg {
@@ -21,32 +22,47 @@
   fill: #c8ff4d;
 }
 
-.hero-visual__orbit {
-  transform-origin: 260px 260px;
-  animation: spin 22s linear infinite;
+.hero-visual__hair path {
+  animation: hero-hair-drift 9s ease-in-out infinite;
+  transform-origin: 260px 300px;
 }
-.hero-visual__orbit--slow {
-  animation-duration: 34s;
+.hero-visual__hair path:nth-child(2n) {
+  animation-duration: 11s;
+  animation-delay: -2s;
 }
-.hero-visual__orbit--mid {
-  animation-duration: 26s;
-}
-.hero-visual__orbit--rev {
-  animation-duration: 30s;
-  animation-direction: reverse;
+.hero-visual__hair path:nth-child(3n) {
+  animation-duration: 7.5s;
+  animation-delay: -4s;
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hero-visual__eyelid {
+  transform-box: fill-box;
+  transform-origin: top;
+  animation: hero-blink 5.5s ease-in-out infinite;
+}
+.hero-visual__eye--right .hero-visual__eyelid {
+  animation-delay: 0.05s;
+}
+
+@keyframes hero-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes hero-hair-drift {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(0.8deg); }
+}
+
+@keyframes hero-blink {
+  0%, 92%, 100% { transform: scaleY(0); }
+  95% { transform: scaleY(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-visual__orbit {
+  .hero-visual,
+  .hero-visual__hair path,
+  .hero-visual__eyelid {
     animation: none;
   }
 }

@@ -74,19 +74,23 @@ function ProjectGlyph({ project }: { project: Project }) {
       return (
         <svg viewBox="0 0 400 220" className="project-glyph" aria-hidden="true">
           <rect x="0" y="0" width="400" height="220" fill="#131311" />
-          {[0, 1, 2].map((col) =>
-            [0, 1].map((row) => (
-              <rect
-                key={`${col}-${row}`}
-                x={24 + col * 128}
-                y={28 + row * 92}
-                width="108"
-                height="72"
-                rx="12"
-                fill={row === 0 && col === 0 ? "#c8ff4d" : "rgba(246,244,238,0.08)"}
-              />
-            ))
-          )}
+          {/* Event card (lime, featured) */}
+          <rect x="24" y="26" width="150" height="168" rx="14" fill="#c8ff4d" />
+          <rect x="40" y="44" width="60" height="8" rx="4" fill="#0e0e0c" fillOpacity="0.7" />
+          <rect x="40" y="66" width="90" height="6" rx="3" fill="#0e0e0c" fillOpacity="0.45" />
+          <rect x="40" y="78" width="70" height="6" rx="3" fill="#0e0e0c" fillOpacity="0.45" />
+          <circle cx="52" cy="160" r="14" fill="#0e0e0c" fillOpacity="0.15" />
+          <rect x="72" y="152" width="86" height="7" rx="3.5" fill="#0e0e0c" fillOpacity="0.6" />
+          <rect x="72" y="166" width="60" height="6" rx="3" fill="#0e0e0c" fillOpacity="0.4" />
+          {/* Two role cards */}
+          <rect x="190" y="26" width="186" height="78" rx="14" fill="rgba(246,244,238,0.08)" />
+          <circle cx="216" cy="52" r="10" fill="#c8ff4d" />
+          <rect x="236" y="46" width="98" height="7" rx="3.5" fill="rgba(246,244,238,0.55)" />
+          <rect x="216" y="74" width="120" height="6" rx="3" fill="rgba(246,244,238,0.3)" />
+          <rect x="190" y="116" width="186" height="78" rx="14" fill="rgba(246,244,238,0.08)" />
+          <circle cx="216" cy="142" r="10" fill="#f2c98a" />
+          <rect x="236" y="136" width="98" height="7" rx="3.5" fill="rgba(246,244,238,0.55)" />
+          <rect x="216" y="164" width="120" height="6" rx="3" fill="rgba(246,244,238,0.3)" />
         </svg>
       );
     case "samagama-faq":
