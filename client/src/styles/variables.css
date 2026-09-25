@@ -1,0 +1,38 @@
+:root {
+  --color-black: #0a0a0a;
+  --color-charcoal: #131311;
+  --color-charcoal-soft: #1b1b18;
+  --color-offwhite: #f6f4ee;
+  --color-cream: #fbfaf6;
+  --color-line: rgba(10, 10, 10, 0.1);
+  --color-line-dark: rgba(246, 244, 238, 0.14);
+  --color-lime: #c8ff4d;
+  --color-lime-dim: #a8e02f;
+  --color-text: #0e0e0c;
+  --color-text-soft: #55534b;
+  --color-text-inverse: #f6f4ee;
+  --color-text-inverse-soft: rgba(246, 244, 238, 0.66);
+
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --container-w: 1280px;
+  --gutter: 24px;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 28px;
+  --radius-pill: 999px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.25s;
+  --dur-med: 0.5s;
+  --dur-slow: 0.9s;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: 18px;
+  }
+}

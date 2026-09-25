@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <circle cx="1020" cy="150" r="3.5" fill="#c8ff4d"/>
+  <circle cx="1080" cy="230" r="3" fill="#f6f4ee" opacity="0.6"/>
+  <text x="80" y="230" font-family="Space Grotesk, Arial, sans-serif" font-size="72" font-weight="700" fill="#f6f4ee">BUILDING</text>
+  <text x="80" y="320" font-family="Georgia, serif" font-style="italic" font-size="72" font-weight="500" fill="#c8ff4d">INTELLIGENT</text>
+  <text x="80" y="410" font-family="Space Grotesk, Arial, sans-serif" font-size="72" font-weight="700" fill="#f6f4ee">EXPERIENCES.</text>
+  <text x="80" y="480" font-family="Inter, Arial, sans-serif" font-size="26" fill="rgba(246,244,238,0.66)">Shruti Kushwaha &#8212; AI/ML Engineer &amp; Full-Stack Developer</text>
+  <text x="80" y="540" font-family="Space Grotesk, Arial, sans-serif" font-size="18" letter-spacing="2" fill="#c8ff4d">BENGALURU, INDIA</text>
+</svg>

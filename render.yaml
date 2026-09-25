@@ -1,0 +1,20 @@
+# Optional Render "Blueprint" for the chat backend. In the Render dashboard,
+# choose New -> Blueprint and point it at this repo, or just create a Web
+# Service manually (see server/README.md) — either works.
+services:
+  - type: web
+    name: shruti-portfolio-api
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ANTHROPIC_MODEL
+        value: claude-haiku-4-5-20251001
+      - key: CORS_ORIGIN
+        value: https://shrutikushwaha2110-ux.github.io
+      - key: PORT
+        value: 10000

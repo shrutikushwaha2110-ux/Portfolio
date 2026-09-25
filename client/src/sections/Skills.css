@@ -1,0 +1,84 @@
+.skills {
+  background: var(--color-black);
+  color: var(--color-text-inverse);
+  padding: 130px 0;
+}
+
+.skills__header {
+  margin-bottom: 56px;
+}
+
+.skills__eyebrow {
+  color: var(--color-lime);
+}
+
+.skills__heading {
+  font-size: clamp(32px, 4.2vw, 50px);
+  margin-top: 18px;
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--color-line-dark);
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.skills__group {
+  background: var(--color-charcoal);
+  padding: 32px;
+  transition: background var(--dur-fast) var(--ease-out);
+}
+
+.skills__group:hover {
+  background: var(--color-charcoal-soft);
+}
+
+.skills__group-label {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-lime);
+  margin-bottom: 18px;
+}
+
+.skills__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.skills__badge {
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-line-dark);
+  color: var(--color-text-inverse-soft);
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.skills__badge:hover {
+  border-color: var(--color-lime);
+  color: var(--color-text-inverse);
+}
+
+@media (max-width: 900px) {
+  .skills {
+    padding: 90px 0;
+  }
+  .skills__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .skills__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

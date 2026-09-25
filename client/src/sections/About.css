@@ -1,0 +1,92 @@
+.about {
+  background: var(--color-offwhite);
+  padding: 130px 0;
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.about__eyebrow {
+  color: var(--color-text-soft);
+}
+
+.about__heading {
+  font-size: clamp(34px, 4.4vw, 54px);
+  margin: 22px 0 36px;
+}
+
+.about__heading-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+}
+
+.about__paragraphs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 620px;
+}
+
+.about__paragraphs p {
+  font-size: 16.5px;
+  line-height: 1.75;
+  color: var(--color-text-soft);
+}
+
+.about__card {
+  background: var(--color-black);
+  color: var(--color-text-inverse);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 110px;
+}
+
+.about__card-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14.5px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-line-dark);
+  color: var(--color-text-inverse-soft);
+}
+
+.about__card-row svg {
+  flex-shrink: 0;
+  color: var(--color-lime);
+}
+
+.about__card-row--accent {
+  color: var(--color-text-inverse);
+  border-bottom: none;
+  padding-bottom: 6px;
+  font-weight: 600;
+  font-family: var(--font-display);
+}
+
+.about__card-github {
+  margin-top: 8px;
+  width: 100%;
+}
+
+@media (max-width: 900px) {
+  .about {
+    padding: 90px 0;
+  }
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+  .about__card {
+    position: static;
+  }
+}

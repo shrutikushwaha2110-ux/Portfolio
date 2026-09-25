@@ -1,0 +1,130 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out),
+    backdrop-filter var(--dur-fast) var(--ease-out);
+}
+
+.navbar--solid {
+  background: rgba(10, 10, 10, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom-color: var(--color-line-dark);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 78px;
+}
+
+.navbar__logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  color: var(--color-text-inverse);
+}
+
+.navbar__logo-dot {
+  color: var(--color-lime);
+}
+
+.navbar__links {
+  display: flex;
+  gap: 36px;
+}
+
+.navbar__links a {
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--color-text-inverse-soft);
+  transition: color var(--dur-fast) var(--ease-out);
+  position: relative;
+}
+
+.navbar__links a:hover {
+  color: var(--color-text-inverse);
+}
+
+.navbar__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1.5px;
+  background: var(--color-lime);
+  transition: width var(--dur-fast) var(--ease-out);
+}
+
+.navbar__links a:hover::after {
+  width: 100%;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navbar__cta {
+  padding: 11px 22px;
+  font-size: 14px;
+}
+
+.navbar__burger {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--color-text-inverse);
+  padding: 6px;
+}
+
+.navbar__mobile {
+  max-height: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 860px) {
+  .navbar__links {
+    display: none;
+  }
+  .navbar__cta {
+    display: none;
+  }
+  .navbar__burger {
+    display: inline-flex;
+  }
+
+  .navbar__mobile {
+    background: var(--color-black);
+    transition: max-height var(--dur-med) var(--ease-out);
+  }
+  .navbar__mobile.navbar__mobile--open {
+    max-height: 520px;
+    border-bottom: 1px solid var(--color-line-dark);
+  }
+  .navbar__mobile nav {
+    display: flex;
+    flex-direction: column;
+    padding: 8px var(--gutter) 0;
+  }
+  .navbar__mobile nav a {
+    padding: 14px 0;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 500;
+    color: var(--color-text-inverse);
+    border-bottom: 1px solid var(--color-line-dark);
+  }
+  .navbar__mobile-cta {
+    margin: 18px var(--gutter) 22px;
+  }
+}
