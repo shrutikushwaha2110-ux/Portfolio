@@ -18,6 +18,87 @@
   pointer-events: none;
 }
 
+/* Intro splash: her portrait, then her name, on a solid black cover that
+   fades away once the main hero is ready to reveal. */
+.hero__splash {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  background: var(--color-black);
+  opacity: 1;
+  transition: opacity 0.7s var(--ease-out), visibility 0.7s;
+}
+
+.hero--revealed .hero__splash {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.hero__splash-avatar {
+  opacity: 0;
+  animation: splash-avatar-in 0.7s var(--ease-out) forwards;
+}
+
+.hero__splash-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(19px, 2.6vw, 25px);
+  letter-spacing: 0.01em;
+  color: var(--color-text-inverse);
+  opacity: 0;
+  transform: translateY(10px);
+  animation: splash-name-in 0.6s var(--ease-out) forwards;
+  animation-delay: 0.55s;
+}
+
+@keyframes splash-avatar-in {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes splash-name-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Main content stays hidden behind the splash, then stagger-reveals as it
+   fades — "opens up with whatever context are there". */
+.hero__reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.hero--revealed .hero__reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.hero--revealed .hero__eyebrow.hero__reveal { transition-delay: 0.05s; }
+.hero--revealed .hero__headline.hero__reveal { transition-delay: 0.12s; }
+.hero--revealed .hero__character.hero__reveal { transition-delay: 0.2s; }
+.hero--revealed .hero__subtitle.hero__reveal { transition-delay: 0.3s; }
+.hero--revealed .hero__actions.hero__reveal { transition-delay: 0.38s; }
+.hero--revealed .hero__location.hero__reveal { transition-delay: 0.45s; }
+.hero--revealed .hero__scroll-indicator.hero__reveal { transition-delay: 0.5s; }
+.hero--revealed .hero__marquee.hero__reveal { transition-delay: 0.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__splash,
+  .hero__splash-avatar,
+  .hero__splash-name,
+  .hero__reveal {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 .hero__inner {
   display: flex;
   flex-direction: column;
