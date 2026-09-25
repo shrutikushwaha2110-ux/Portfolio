@@ -1,0 +1,56 @@
+.cartoon-girl {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  aspect-ratio: 360 / 420;
+  animation: girl-float 6s ease-in-out infinite;
+}
+
+.cartoon-girl__svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.cartoon-girl__eyelid {
+  transform-box: fill-box;
+  transform-origin: top;
+  animation: girl-blink 5.2s ease-in-out infinite;
+}
+
+.cartoon-girl__accent {
+  animation: girl-drift 4.5s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.cartoon-girl__accent--b {
+  animation-duration: 5.5s;
+  animation-delay: -1.2s;
+}
+.cartoon-girl__accent--c {
+  animation-duration: 3.8s;
+  animation-delay: -2.4s;
+}
+
+@keyframes girl-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes girl-blink {
+  0%, 90%, 100% { transform: scaleY(0); }
+  94% { transform: scaleY(1); }
+}
+
+@keyframes girl-drift {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartoon-girl,
+  .cartoon-girl__eyelid,
+  .cartoon-girl__accent {
+    animation: none;
+  }
+}

@@ -1,5 +1,5 @@
 import { ArrowDown, MapPin } from "lucide-react";
-import HeroVisual from "../components/HeroVisual";
+import CartoonGirl from "../components/CartoonGirl";
 import { profile, marqueeItems } from "../data/profile";
 import "./Hero.css";
 
@@ -13,45 +13,43 @@ export default function Hero() {
       <div className="hero__bg-grid" aria-hidden="true" />
 
       <div className="container hero__inner">
-        <div className="hero__copy">
-          <span className="eyebrow hero__eyebrow">
-            <span className="hero__dot" />
-            Open to Internship Opportunities
-          </span>
+        <span className="eyebrow hero__eyebrow">
+          <span className="hero__dot" />
+          Open to Internship Opportunities
+        </span>
 
-          <h1 className="hero__headline">
-            BUILDING
-            <br />
-            <span className="hero__headline-serif">INTELLIGENT</span>
-            <br />
-            EXPERIENCES.
-          </h1>
+        <h1 className="hero__headline">
+          BUILDING
+          <br />
+          <span className="hero__headline-serif">INTELLIGENT</span>
+          <br />
+          EXPERIENCES.
+        </h1>
 
-          <p className="hero__subtitle">
-            I'm Shruti {"—"} an AI/ML enthusiast and developer building thoughtful digital
-            products, intelligent systems, and experiences that solve real problems.
-          </p>
-
-          <div className="hero__actions">
-            <button className="btn btn-lime" onClick={scrollToProjects}>
-              Explore My Work
-            </button>
-            <a
-              href={`mailto:${profile.email}?subject=${encodeURIComponent("Let's connect")}`}
-              className="btn btn-outline-dark"
-            >
-              Let's Connect
-            </a>
-          </div>
-
-          <div className="hero__location">
-            <MapPin size={15} />
-            <span>{profile.location}</span>
-          </div>
+        <div className="hero__character">
+          <CartoonGirl />
         </div>
 
-        <div className="hero__visual">
-          <HeroVisual />
+        <p className="hero__subtitle">
+          I'm Shruti {"—"} an AI/ML enthusiast and developer building thoughtful digital
+          products, intelligent systems, and experiences that solve real problems.
+        </p>
+
+        <div className="hero__actions">
+          <button className="btn btn-lime" onClick={scrollToProjects}>
+            Explore My Work
+          </button>
+          <a
+            href={`mailto:${profile.email}?subject=${encodeURIComponent("Let's connect")}`}
+            className="btn btn-outline-dark"
+          >
+            Let's Connect
+          </a>
+        </div>
+
+        <div className="hero__location">
+          <MapPin size={15} />
+          <span>{profile.location}</span>
         </div>
       </div>
 

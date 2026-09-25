@@ -45,6 +45,33 @@
   grid-column: span 1;
 }
 
+/* Inner drift/tilt layer — deliberately separate from the reveal-stagger
+   entrance transform on the outer grid item (see Projects.tsx). */
+.projects__tilt {
+  height: 100%;
+  transform: translateY(var(--parallax-y, 0px)) rotate(var(--tilt, 0deg));
+  transition: transform var(--dur-med) var(--ease-out);
+  will-change: transform;
+}
+
+.projects__tilt:hover {
+  --tilt: 0deg;
+}
+
+.projects__tilt--l {
+  --tilt: -1.4deg;
+}
+
+.projects__tilt--r {
+  --tilt: 1.1deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projects__tilt {
+    transform: none !important;
+  }
+}
+
 @media (max-width: 900px) {
   .projects {
     padding: 90px 0;
@@ -56,5 +83,9 @@
   .projects__item--medium,
   .projects__item--small {
     grid-column: 1 / -1;
+  }
+  .projects__tilt--l,
+  .projects__tilt--r {
+    --tilt: 0deg;
   }
 }

@@ -3,7 +3,34 @@ import ProjectCard from "../components/ProjectCard";
 import ProjectModal from "../components/ProjectModal";
 import { projects, type Project } from "../data/projects";
 import { useReveal } from "../hooks/useReveal";
+import { useParallax } from "../hooks/useParallax";
 import "./Projects.css";
+
+interface GridItemProps {
+  project: Project;
+  speed: number;
+  tilt?: "l" | "r";
+  onOpen: (project: Project) => void;
+  outerClassName: string;
+}
+
+// The outer element stays a plain reveal-stagger target (entrance fade/slide);
+// the inner ".projects__tilt" gets its own scroll-parallax drift and static
+// tilt (straightening on hover) — the layered, slightly-off-axis collage
+// feel from the Fractiona reference, built with plain scroll math and CSS,
+// kept on a separate element so it never fights the entrance animation's
+// own transform.
+function GridItem({ project, speed, tilt, onOpen, outerClassName }: GridItemProps) {
+  const parallaxRef = useParallax<HTMLDivElement>(speed);
+  const tiltClass = tilt ? ` projects__tilt--${tilt}` : "";
+  return (
+    <div className={outerClassName}>
+      <div ref={parallaxRef} className={`projects__tilt${tiltClass}`}>
+        <ProjectCard project={project} onOpen={onOpen} />
+      </div>
+    </div>
+  );
+}
 
 export default function Projects() {
   const [active, setActive] = useState<Project | null>(null);
@@ -12,6 +39,7 @@ export default function Projects() {
 
   const featured = projects.find((p) => p.size === "featured");
   const rest = projects.filter((p) => p.size !== "featured");
+  const speedBySize: Record<string, number> = { large: 0.05, medium: 0.09, small: 0.13 };
 
   return (
     <section id="projects" className="projects">
@@ -26,14 +54,22 @@ export default function Projects() {
 
         <div ref={gridRef} className="projects__grid reveal-stagger">
           {featured && (
-            <div className="projects__featured">
-              <ProjectCard project={featured} onOpen={setActive} />
-            </div>
+            <GridItem
+              project={featured}
+              speed={0.02}
+              onOpen={setActive}
+              outerClassName="projects__featured"
+            />
           )}
-          {rest.map((project) => (
-            <div key={project.id} className={`projects__item projects__item--${project.size}`}>
-              <ProjectCard project={project} onOpen={setActive} />
-            </div>
+          {rest.map((project, i) => (
+            <GridItem
+              key={project.id}
+              project={project}
+              speed={speedBySize[project.size] ?? 0.08}
+              tilt={i % 2 === 0 ? "l" : "r"}
+              onOpen={setActive}
+              outerClassName={`projects__item projects__item--${project.size}`}
+            />
           ))}
         </div>
       </div>
