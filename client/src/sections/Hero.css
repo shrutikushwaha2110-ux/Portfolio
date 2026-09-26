@@ -364,3 +364,24 @@
     width: 100%;
   }
 }
+
+/* CSS-only failsafe: even if the React timer never fires (throttled tab,
+   blocked script, odd browser), the splash fades out and the content
+   reveals on its own after the intro window. */
+.hero__splash {
+  animation: splash-failsafe 0.7s var(--ease-out) forwards;
+  animation-delay: calc(var(--intro-ms, 3500ms) + 0.4s);
+}
+@keyframes splash-failsafe {
+  to { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+.hero__reveal {
+  animation: reveal-failsafe 0.7s var(--ease-out) forwards;
+  animation-delay: calc(var(--intro-ms, 3500ms) + 0.5s);
+}
+@keyframes reveal-failsafe {
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__splash, .hero__reveal { animation: none; }
+}

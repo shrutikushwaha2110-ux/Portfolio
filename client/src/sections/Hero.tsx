@@ -8,7 +8,7 @@ import "./Hero.css";
 // How long the splash (her portrait + name, nothing else) holds before the
 // page opens up. Set to 5s by default — change this one constant if you want
 // it longer (e.g. 50000 for a full 50s cinematic hold).
-const INTRO_HOLD_MS = 5000;
+const INTRO_HOLD_MS = 3500;
 
 const SPLASH_FADE_MS = 700;
 
@@ -75,6 +75,7 @@ export default function Hero() {
       id="home"
       ref={heroRef}
       className={`hero ${introDone ? "hero--revealed" : "hero--intro"}`}
+      style={{ ["--intro-ms" as string]: `${INTRO_HOLD_MS}ms` }}
     >
       <div className="hero__bg-grid" aria-hidden="true" />
       <div className="hero__spotlight" aria-hidden="true" />
