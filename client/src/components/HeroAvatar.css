@@ -48,21 +48,18 @@
   height: var(--eye-size, 13px);
   margin-left: calc(var(--eye-size, 13px) / -2);
   margin-top: calc(var(--eye-size, 13px) / -2);
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% 50%, rgba(20, 12, 8, 0.55), rgba(20, 12, 8, 0) 72%);
-  transition: transform 0.06s linear;
+  transition: transform 0.05s linear;
   pointer-events: none;
 }
 
+/* Concentric and un-offset on purpose: whatever we nudge is exactly the
+   calibrated point, so it can never drift away from her actual pupil. */
 .hero-avatar__glint {
   position: absolute;
-  top: 22%;
-  left: 26%;
-  width: 30%;
-  height: 30%;
+  inset: 22%;
   border-radius: 50%;
-  background: #fff8ec;
-  box-shadow: 0 0 5px 1px rgba(255, 248, 230, 0.7);
+  background: #fff6e6;
+  opacity: 0.8;
   mix-blend-mode: screen;
 }
 

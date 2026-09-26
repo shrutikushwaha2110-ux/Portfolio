@@ -5,12 +5,12 @@ interface Props {
   size?: "lg" | "md";
 }
 
-// Eye centers as fractions of the source image (measured against the actual
-// artwork), used to position the moving catchlight/pupil overlays and to
-// aim the whole-head tilt.
-const LEFT_EYE = { xPct: 43.8, yPct: 31.4 };
-const RIGHT_EYE = { xPct: 57.0, yPct: 31.7 };
-const MAX_PUPIL_PX = 3.2;
+// Eye centers as fractions of the source image, measured directly against
+// the actual artwork with a calibration grid overlay (not eyeballed) — see
+// scratch calibration in project notes if this image is ever replaced.
+const LEFT_EYE = { xPct: 42.3, yPct: 32.2 };
+const RIGHT_EYE = { xPct: 57.6, yPct: 32.0 };
+const MAX_PUPIL_PX = 5;
 const MAX_TILT_DEG = 6;
 
 /**

@@ -77,10 +77,45 @@
   font-weight: 500;
 }
 
-.contact__method-arrow {
+.contact__method-copy {
   margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-line-dark);
+  background: transparent;
+  color: var(--color-text-inverse-soft);
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 500;
+  flex-shrink: 0;
+  transition: border-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.contact__method-copy:hover {
+  border-color: var(--color-lime);
+  color: var(--color-lime);
+}
+
+.contact__method-copy-label {
+  min-width: 42px;
+  text-align: left;
+}
+
+.contact__method-arrow {
+  margin-left: 14px;
   opacity: 0.5;
   flex-shrink: 0;
+}
+
+.contact__hint {
+  font-size: 13px;
+  color: var(--color-text-inverse-soft);
+  opacity: 0.7;
+  margin: -20px 0 32px;
+  max-width: 480px;
 }
 
 .contact__actions {
@@ -102,5 +137,14 @@
   }
   .contact__actions .btn {
     width: 100%;
+  }
+  .contact__method-copy-label {
+    display: none;
+  }
+  .contact__method-copy {
+    padding: 8px;
+  }
+  .contact__method-arrow {
+    display: none;
   }
 }

@@ -9,10 +9,22 @@ import "./Hero.css";
 // it longer (e.g. 50000 for a full 50s cinematic hold).
 const INTRO_HOLD_MS = 5000;
 
+const SPLASH_FADE_MS = 700;
+
 export default function Hero() {
   const [introDone, setIntroDone] = useState(false);
   const [skipIntro, setSkipIntro] = useState(false);
+  const [splashMounted, setSplashMounted] = useState(true);
   const heroRef = useRef<HTMLElement>(null);
+
+  // Fully unmount the splash once it's faded out — not just hidden — so its
+  // avatar instance (and its own mousemove listener) can never linger behind
+  // the main content.
+  useEffect(() => {
+    if (!introDone) return;
+    const t = setTimeout(() => setSplashMounted(false), SPLASH_FADE_MS);
+    return () => clearTimeout(t);
+  }, [introDone]);
 
   useEffect(() => {
     const el = heroRef.current;
@@ -67,7 +79,7 @@ export default function Hero() {
       <div className="hero__spotlight" aria-hidden="true" />
 
       {/* Intro splash: her portrait, then her name, before the page opens up. */}
-      {!skipIntro && (
+      {!skipIntro && splashMounted && (
         <button
           type="button"
           className="hero__splash"

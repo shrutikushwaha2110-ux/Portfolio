@@ -66,7 +66,10 @@ export default function Projects() {
               key={project.id}
               project={project}
               speed={speedBySize[project.size] ?? 0.08}
-              tilt={i % 2 === 0 ? "l" : "r"}
+              // Rotation is only safe on the narrower medium/small cards — a
+              // full-row-width card visibly rotating swings its corners into
+              // the row above/below it, however small the angle.
+              tilt={project.size === "large" ? undefined : i % 2 === 0 ? "l" : "r"}
               onOpen={setActive}
               outerClassName={`projects__item projects__item--${project.size}`}
             />

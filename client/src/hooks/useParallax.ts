@@ -7,6 +7,11 @@ import { useEffect, useRef } from "react";
  * scroll listener per hook instance, rAF-throttled, and a no-op under
  * prefers-reduced-motion.
  */
+// Clamp how far anything can drift, however far it scrolls, so neighbouring
+// cards can never close the gap between them (let alone overlap) — depth
+// without risking collision.
+const MAX_DRIFT_PX = 26;
+
 export function useParallax<T extends HTMLElement = HTMLDivElement>(speed = 0.08) {
   const ref = useRef<T | null>(null);
 
@@ -22,7 +27,10 @@ export function useParallax<T extends HTMLElement = HTMLDivElement>(speed = 0.08
       const rect = el.getBoundingClientRect();
       const viewportCenter = window.innerHeight / 2;
       const elCenter = rect.top + rect.height / 2;
-      const offset = (viewportCenter - elCenter) * speed;
+      const offset = Math.max(
+        -MAX_DRIFT_PX,
+        Math.min(MAX_DRIFT_PX, (viewportCenter - elCenter) * speed)
+      );
       el.style.setProperty("--parallax-y", `${offset.toFixed(1)}px`);
     };
 

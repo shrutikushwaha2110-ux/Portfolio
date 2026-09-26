@@ -26,7 +26,7 @@
 .projects__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 56px 24px;
 }
 
 .projects__featured {
@@ -48,22 +48,24 @@
 /* Inner drift/tilt layer — deliberately separate from the reveal-stagger
    entrance transform on the outer grid item (see Projects.tsx). */
 .projects__tilt {
+  position: relative;
   height: 100%;
   transform: translateY(var(--parallax-y, 0px)) rotate(var(--tilt, 0deg));
-  transition: transform var(--dur-med) var(--ease-out);
+  transition: transform var(--dur-med) var(--ease-out), z-index 0s;
   will-change: transform;
 }
 
 .projects__tilt:hover {
   --tilt: 0deg;
+  z-index: 2;
 }
 
 .projects__tilt--l {
-  --tilt: -1.4deg;
+  --tilt: -1deg;
 }
 
 .projects__tilt--r {
-  --tilt: 1.1deg;
+  --tilt: 0.8deg;
 }
 
 @media (prefers-reduced-motion: reduce) {
