@@ -1,14 +1,42 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDown, MapPin } from "lucide-react";
 import HeroAvatar from "../components/HeroAvatar";
 import { profile, marqueeItems } from "../data/profile";
 import "./Hero.css";
 
-const INTRO_HOLD_MS = 1900;
+// How long the splash (her portrait + name, nothing else) holds before the
+// page opens up. Set to 5s by default — change this one constant if you want
+// it longer (e.g. 50000 for a full 50s cinematic hold).
+const INTRO_HOLD_MS = 5000;
 
 export default function Hero() {
   const [introDone, setIntroDone] = useState(false);
   const [skipIntro, setSkipIntro] = useState(false);
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let frame: number | null = null;
+    const onMove = (e: MouseEvent) => {
+      if (frame != null) return;
+      frame = requestAnimationFrame(() => {
+        frame = null;
+        const rect = el.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        el.style.setProperty("--spot-x", `${x.toFixed(1)}%`);
+        el.style.setProperty("--spot-y", `${y.toFixed(1)}%`);
+      });
+    };
+    window.addEventListener("mousemove", onMove, { passive: true });
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      if (frame != null) cancelAnimationFrame(frame);
+    };
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -17,7 +45,12 @@ export default function Hero() {
       return;
     }
     const t = setTimeout(() => setIntroDone(true), INTRO_HOLD_MS);
-    return () => clearTimeout(t);
+    const onKey = () => setIntroDone(true);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("keydown", onKey);
+    };
   }, []);
 
   const scrollToProjects = () => {
@@ -25,17 +58,30 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className={`hero ${introDone ? "hero--revealed" : "hero--intro"}`}>
+    <section
+      id="home"
+      ref={heroRef}
+      className={`hero ${introDone ? "hero--revealed" : "hero--intro"}`}
+    >
       <div className="hero__bg-grid" aria-hidden="true" />
+      <div className="hero__spotlight" aria-hidden="true" />
 
       {/* Intro splash: her portrait, then her name, before the page opens up. */}
       {!skipIntro && (
-        <div className="hero__splash" aria-hidden="true">
+        <button
+          type="button"
+          className="hero__splash"
+          onClick={() => setIntroDone(true)}
+          aria-label="Skip intro"
+        >
           <div className="hero__splash-avatar">
             <HeroAvatar size="md" />
           </div>
           <span className="hero__splash-name">Shruti Kushwaha</span>
-        </div>
+          <span className="hero__splash-tagline">AI/ML Engineer &amp; Full-Stack Developer</span>
+          <span className="hero__splash-progress" style={{ animationDuration: `${INTRO_HOLD_MS}ms` }} />
+          <span className="hero__splash-skip">Skip {"→"}</span>
+        </button>
       )}
 
       <div className="container hero__inner">

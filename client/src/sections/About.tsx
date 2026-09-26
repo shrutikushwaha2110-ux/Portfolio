@@ -2,10 +2,12 @@ import { GraduationCap, MapPin, Sparkles } from "lucide-react";
 import GithubMark from "../components/icons/GithubMark";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
+import { useTilt } from "../hooks/useTilt";
 import "./About.css";
 
 export default function About() {
   const revealRef = useReveal<HTMLDivElement>();
+  const tiltRef = useTilt<HTMLDivElement>({ max: 6, scale: 1.015 });
 
   return (
     <section id="about" className="about">
@@ -26,7 +28,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="about__card">
+          <div ref={tiltRef} className="about__card">
             <div className="about__card-row">
               <MapPin size={18} />
               <span>{profile.location}</span>

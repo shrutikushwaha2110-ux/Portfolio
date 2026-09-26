@@ -1,6 +1,23 @@
-import { skillGroups } from "../data/skills";
+import { skillGroups, type SkillGroup } from "../data/skills";
 import { useReveal } from "../hooks/useReveal";
+import { useTilt } from "../hooks/useTilt";
 import "./Skills.css";
+
+function SkillGroupCard({ group }: { group: SkillGroup }) {
+  const tiltRef = useTilt<HTMLDivElement>({ max: 5, scale: 1.02 });
+  return (
+    <div ref={tiltRef} className="skills__group">
+      <h3 className="skills__group-label">{group.label}</h3>
+      <div className="skills__badges">
+        {group.items.map((item) => (
+          <span key={item} className="skills__badge">
+            {item}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Skills() {
   const headerRef = useReveal<HTMLDivElement>();
@@ -16,16 +33,7 @@ export default function Skills() {
 
         <div ref={gridRef} className="skills__grid reveal-stagger">
           {skillGroups.map((group) => (
-            <div key={group.label} className="skills__group">
-              <h3 className="skills__group-label">{group.label}</h3>
-              <div className="skills__badges">
-                {group.items.map((item) => (
-                  <span key={item} className="skills__badge">
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <SkillGroupCard key={group.label} group={group} />
           ))}
         </div>
       </div>

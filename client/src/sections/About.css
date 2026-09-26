@@ -45,6 +45,13 @@
   padding: 34px;
   display: flex;
   flex-direction: column;
+  transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+  will-change: transform;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.about__card:hover {
+  box-shadow: 0 26px 50px -22px rgba(0, 0, 0, 0.5);
   gap: 20px;
   position: sticky;
   top: 110px;

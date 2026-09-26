@@ -30,7 +30,8 @@
 .skills__group {
   background: var(--color-charcoal);
   padding: 32px;
-  transition: background var(--dur-fast) var(--ease-out);
+  transition: background var(--dur-fast) var(--ease-out), transform 0.2s var(--ease-out);
+  will-change: transform;
 }
 
 .skills__group:hover {

@@ -5,34 +5,53 @@ interface Props {
   size?: "lg" | "md";
 }
 
+// Eye centers as fractions of the source image (measured against the actual
+// artwork), used to position the moving catchlight/pupil overlays and to
+// aim the whole-head tilt.
+const LEFT_EYE = { xPct: 43.8, yPct: 31.4 };
+const RIGHT_EYE = { xPct: 57.0, yPct: 31.7 };
+const MAX_PUPIL_PX = 3.2;
+const MAX_TILT_DEG = 6;
+
 /**
- * Circular portrait avatar that subtly tilts toward the cursor (a 3D
- * perspective rotate, clamped to a small angle) so it still reads as
- * "aware of you" the way the earlier illustrated eyes did, even though a
- * photo can't move its pupils. Pure mousemove + rAF throttle, no library.
+ * Illustrated portrait avatar whose eyes actually track the cursor: two
+ * small catchlight/pupil overlays are pinned over her painted eyes and
+ * nudged a few pixels toward the pointer, plus a subtle whole-head 3D tilt
+ * for depth. Pure mousemove + rAF throttle, no dependencies.
  */
 export default function HeroAvatar({ size = "lg" }: Props) {
+  const wrapRef = useRef<HTMLDivElement>(null);
   const tiltRef = useRef<HTMLDivElement>(null);
+  const leftPupilRef = useRef<HTMLDivElement>(null);
+  const rightPupilRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const applyTilt = (clientX: number, clientY: number) => {
+    const apply = (clientX: number, clientY: number) => {
       frameRef.current = null;
-      const el = tiltRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
+      const wrap = wrapRef.current;
+      const tilt = tiltRef.current;
+      if (!wrap || !tilt) return;
+      const rect = wrap.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      const dx = Math.max(-1, Math.min(1, (clientX - cx) / (rect.width * 1.4)));
-      const dy = Math.max(-1, Math.min(1, (clientY - cy) / (rect.height * 1.4)));
-      el.style.transform = `rotateX(${(-dy * 9).toFixed(2)}deg) rotateY(${(dx * 11).toFixed(2)}deg)`;
+
+      const dxNorm = Math.max(-1, Math.min(1, (clientX - cx) / (rect.width * 1.4)));
+      const dyNorm = Math.max(-1, Math.min(1, (clientY - cy) / (rect.height * 1.4)));
+
+      tilt.style.transform = `rotateX(${(-dyNorm * MAX_TILT_DEG).toFixed(2)}deg) rotateY(${(dxNorm * MAX_TILT_DEG).toFixed(2)}deg)`;
+
+      const px = (dxNorm * MAX_PUPIL_PX).toFixed(2);
+      const py = (dyNorm * MAX_PUPIL_PX).toFixed(2);
+      if (leftPupilRef.current) leftPupilRef.current.style.transform = `translate(${px}px, ${py}px)`;
+      if (rightPupilRef.current) rightPupilRef.current.style.transform = `translate(${px}px, ${py}px)`;
     };
 
     const onMove = (e: MouseEvent) => {
       if (frameRef.current == null) {
-        frameRef.current = requestAnimationFrame(() => applyTilt(e.clientX, e.clientY));
+        frameRef.current = requestAnimationFrame(() => apply(e.clientX, e.clientY));
       }
     };
 
@@ -44,16 +63,30 @@ export default function HeroAvatar({ size = "lg" }: Props) {
   }, []);
 
   return (
-    <div className={`hero-avatar hero-avatar--${size}`}>
+    <div ref={wrapRef} className={`hero-avatar hero-avatar--${size}`}>
+      <div className="hero-avatar__glow" aria-hidden="true" />
       <div ref={tiltRef} className="hero-avatar__tilt">
-        <div className="hero-avatar__ring" />
         <img
           className="hero-avatar__img"
           src={`${import.meta.env.BASE_URL}images/shruti-avatar.webp`}
-          alt="Portrait illustration of Shruti Kushwaha"
-          width={800}
-          height={1200}
+          alt="Illustrated portrait of Shruti Kushwaha"
+          width={700}
+          height={663}
         />
+        <div
+          ref={leftPupilRef}
+          className="hero-avatar__eye"
+          style={{ left: `${LEFT_EYE.xPct}%`, top: `${LEFT_EYE.yPct}%` }}
+        >
+          <span className="hero-avatar__glint" />
+        </div>
+        <div
+          ref={rightPupilRef}
+          className="hero-avatar__eye"
+          style={{ left: `${RIGHT_EYE.xPct}%`, top: `${RIGHT_EYE.yPct}%` }}
+        >
+          <span className="hero-avatar__glint" />
+        </div>
       </div>
     </div>
   );
