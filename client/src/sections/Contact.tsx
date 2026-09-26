@@ -3,6 +3,7 @@ import { Mail, Phone, ArrowUpRight, Copy, Check } from "lucide-react";
 import GithubMark from "../components/icons/GithubMark";
 import { profile } from "../data/profile";
 import { useReveal } from "../hooks/useReveal";
+import { handleMailtoClick, handleTelClick } from "../lib/contactClick";
 import "./Contact.css";
 
 // mailto:/tel: links only do anything if the visitor's OS has a mail or
@@ -56,7 +57,11 @@ export default function Contact() {
           </p>
 
           <div className="contact__methods">
-            <a href={`mailto:${profile.email}`} className="contact__method">
+            <a
+              href={`mailto:${profile.email}`}
+              className="contact__method"
+              onClick={() => handleMailtoClick(profile.email)}
+            >
               <div className="contact__method-icon">
                 <Mail size={20} />
               </div>
@@ -68,7 +73,11 @@ export default function Contact() {
               <ArrowUpRight size={18} className="contact__method-arrow" />
             </a>
 
-            <a href={profile.phoneHref} className="contact__method">
+            <a
+              href={profile.phoneHref}
+              className="contact__method"
+              onClick={() => handleTelClick(profile.phone)}
+            >
               <div className="contact__method-icon">
                 <Phone size={20} />
               </div>
@@ -98,10 +107,18 @@ export default function Contact() {
           </p>
 
           <div className="contact__actions">
-            <a href={`mailto:${profile.email}`} className="btn btn-lime">
+            <a
+              href={`mailto:${profile.email}`}
+              className="btn btn-lime"
+              onClick={() => handleMailtoClick(profile.email)}
+            >
               Send an Email
             </a>
-            <a href={profile.phoneHref} className="btn btn-outline-dark">
+            <a
+              href={profile.phoneHref}
+              className="btn btn-outline-dark"
+              onClick={() => handleTelClick(profile.phone)}
+            >
               Call Me
             </a>
             <a href={profile.github} target="_blank" rel="noreferrer" className="btn btn-outline-dark">

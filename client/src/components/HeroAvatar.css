@@ -6,11 +6,9 @@
 
 .hero-avatar--lg {
   width: 300px;
-  --eye-size: 13px;
 }
 .hero-avatar--md {
   width: 190px;
-  --eye-size: 8px;
 }
 
 .hero-avatar__glow {
@@ -34,33 +32,23 @@
   will-change: transform;
 }
 
-.hero-avatar__img {
-  position: relative;
+.hero-avatar__svg {
   width: 100%;
   height: auto;
   display: block;
-  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.55));
+  overflow: visible;
+  filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.5));
 }
 
-.hero-avatar__eye {
-  position: absolute;
-  width: var(--eye-size, 13px);
-  height: var(--eye-size, 13px);
-  margin-left: calc(var(--eye-size, 13px) / -2);
-  margin-top: calc(var(--eye-size, 13px) / -2);
-  transition: transform 0.05s linear;
-  pointer-events: none;
+.hero-avatar__eyelid {
+  transform-box: fill-box;
+  transform-origin: top;
+  animation: avatar-blink 5.4s ease-in-out infinite;
 }
 
-/* Concentric and un-offset on purpose: whatever we nudge is exactly the
-   calibrated point, so it can never drift away from her actual pupil. */
-.hero-avatar__glint {
-  position: absolute;
-  inset: 22%;
-  border-radius: 50%;
-  background: #fff6e6;
-  opacity: 0.8;
-  mix-blend-mode: screen;
+@keyframes avatar-blink {
+  0%, 92%, 100% { transform: scaleY(0); }
+  95.5% { transform: scaleY(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -70,8 +58,8 @@
   .hero-avatar__glow {
     animation: none;
   }
-  .hero-avatar__eye {
-    display: none;
+  .hero-avatar__eyelid {
+    animation: none;
   }
 }
 

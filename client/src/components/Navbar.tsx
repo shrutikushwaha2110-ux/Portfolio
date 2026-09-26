@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { useScrolled } from "../hooks/useScrolled";
 import { profile } from "../data/profile";
+import { handleMailtoClick } from "../lib/contactClick";
 import "./Navbar.css";
 
 const links = [
@@ -57,6 +58,7 @@ export default function Navbar() {
               "Let's talk — Internship opportunity"
             )}`}
             className="btn btn-lime navbar__cta"
+            onClick={() => handleMailtoClick(profile.email)}
           >
             Let's Talk
           </a>
@@ -91,6 +93,7 @@ export default function Navbar() {
             "Let's talk — Internship opportunity"
           )}`}
           className="btn btn-lime navbar__mobile-cta"
+          onClick={() => handleMailtoClick(profile.email)}
         >
           Let's Talk
         </a>

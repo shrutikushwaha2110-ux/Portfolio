@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowDown, MapPin } from "lucide-react";
 import HeroAvatar from "../components/HeroAvatar";
 import { profile, marqueeItems } from "../data/profile";
+import { handleMailtoClick } from "../lib/contactClick";
 import "./Hero.css";
 
 // How long the splash (her portrait + name, nothing else) holds before the
@@ -126,6 +127,7 @@ export default function Hero() {
           <a
             href={`mailto:${profile.email}?subject=${encodeURIComponent("Let's connect")}`}
             className="btn btn-outline-dark"
+            onClick={() => handleMailtoClick(profile.email)}
           >
             Let's Connect
           </a>
