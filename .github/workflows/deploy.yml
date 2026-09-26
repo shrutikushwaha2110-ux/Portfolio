@@ -40,9 +40,9 @@ jobs:
         working-directory: client
         env:
           # IMPORTANT: must match the GitHub repository name (case-sensitive),
-          # wrapped in slashes, e.g. "/portfolio/". If you rename the repo,
-          # update this value. See client/vite.config.ts for how it's used.
-          VITE_BASE_PATH: /portfolio/
+          # wrapped in slashes. Repo is "Portfolio" (capital P). If you rename
+          # the repo, update this value. See client/vite.config.ts.
+          VITE_BASE_PATH: /Portfolio/
           # Point the production build at your deployed backend so the AI
           # chatbot works live. Set this repo's Actions variable
           # VITE_API_BASE_URL (Settings -> Secrets and variables -> Actions

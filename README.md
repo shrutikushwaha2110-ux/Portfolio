@@ -4,7 +4,7 @@ A personal developer portfolio: a React + TypeScript + Vite frontend (no Tailwin
 and a small Express backend that powers an AI portfolio assistant using the Anthropic Claude
 API, with a keyword-based fallback so the site works even without an API key.
 
-- **Live site:** `https://shrutikushwaha2110-ux.github.io/portfolio/` (after you enable Pages — see below)
+- **Live site:** `https://shrutikushwaha2110-ux.github.io/Portfolio/` (after you enable Pages — see below)
 - **Frontend:** [`client/`](client) — React 19 + TypeScript + Vite, plain CSS
 - **Backend:** [`server/`](server) — Express + the Anthropic TypeScript SDK
 
@@ -92,21 +92,21 @@ This repo includes [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml
 
 **One-time setup (you need to do this in the GitHub UI):**
 
-1. Push this repo to GitHub as `shrutikushwaha2110-ux/portfolio` (or any name — see below).
+1. Push this repo to GitHub as `shrutikushwaha2110-ux/Portfolio` (or any name — see below).
 2. In the repo, go to **Settings → Pages** and set **Source** to **GitHub Actions**.
 3. (Optional, for a working live chatbot) Go to **Settings → Secrets and variables → Actions
    → Variables** and add `VITE_API_BASE_URL` with your deployed backend's URL (see below).
 4. Push to `main` (or run the workflow manually from the **Actions** tab). After it finishes,
-   your site is live at `https://shrutikushwaha2110-ux.github.io/portfolio/`.
+   your site is live at `https://shrutikushwaha2110-ux.github.io/Portfolio/`.
 
-**If you rename the repository** (i.e. it's not called `portfolio`), update the
+**If you rename the repository** (i.e. it's not called `Portfolio`), update the
 `VITE_BASE_PATH` value in `.github/workflows/deploy.yml` to `/<your-repo-name>/` — it must
 match exactly, including the leading/trailing slashes.
 
 Push commands, once you've created the empty repo on GitHub:
 
 ```bash
-git remote add origin https://github.com/shrutikushwaha2110-ux/portfolio.git
+git remote add origin https://github.com/shrutikushwaha2110-ux/Portfolio.git
 git branch -M main
 git push -u origin main
 ```
